@@ -24,7 +24,7 @@ resource "aws_subnet" "subnet_1" {
   tags = merge(local.aws_tags, {
     Name = "${local.aws_tags.Environment}-public-${local.subnet_az1}"
     "kubernetes.io/role/elb" = "1"
-    "kubernetes.io/cluster/${local.aws_tags.Environment}-${local.eks_name}" = "owned"
+    "kubernetes.io/cluster/${local.eks_name}" = "shared"
   })
 }
 
@@ -38,7 +38,7 @@ resource "aws_subnet" "subnet_2" {
   tags = merge(local.aws_tags, {
     Name = "${local.aws_tags.Environment}-public-${local.subnet_az2}"
     "kubernetes.io/role/elb" = "1"
-    "kubernetes.io/cluster/${local.aws_tags.Environment}-${local.eks_name}" = "owned"
+    "kubernetes.io/cluster/${local.eks_name}" = "shared"
   })
 }
 

@@ -10,3 +10,6 @@ data "aws_eks_cluster_auth" "eks_auth" {
   depends_on = [ aws_eks_cluster.eks ]
 }
 
+data "aws_cloudformation_stack" "nodegroup_datasrc" {
+  name = aws_cloudformation_stack.nodegroup.name
+}

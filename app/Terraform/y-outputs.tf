@@ -9,3 +9,4 @@ output "node_autoscaling_group" {
 output "node_security_group" {
   value = aws_cloudformation_stack.nodegroup.outputs["NodeSecurityGroup"]
 }
+

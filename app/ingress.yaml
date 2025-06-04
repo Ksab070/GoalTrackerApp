@@ -8,7 +8,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: demo.kubesimplify.com
+  - host: demo.cloud-personal.com
     http:
       paths:
       - path: /
@@ -20,5 +20,5 @@ spec:
               number: 80
   tls:
   - hosts:
-    - demo.kubesimplify.com
+    - demo.cloud-personal.com
     secretName: app
