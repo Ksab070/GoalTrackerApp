@@ -26,6 +26,14 @@ resource "aws_iam_role_policy_attachment" "cluster-policy" {
   role = aws_iam_role.eks-cluster.name
 }
 
+#This is required for POSTGRESQL
+resource "aws_iam_role_policy_attachment" "ebs-csi-driver-policy" {
+  #policy given here is a permission policy, which defines the permissions for the AWS 
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy"
+  role = aws_iam_role.eks-cluster.name
+}
+
+
 resource "aws_eks_cluster" "eks" {
   name = "${local.eks_name}"
   role_arn = aws_iam_role.eks-cluster.arn
@@ -48,4 +56,9 @@ resource "aws_eks_cluster" "eks" {
   }
 
   depends_on = [ aws_iam_role_policy_attachment.cluster-policy ]
+}
+
+resource "aws_eks_addon" "ebs-csi" {
+  cluster_name = aws_eks_cluster.eks.name
+  addon_name = "aws-ebs-csi-driver"
 }
