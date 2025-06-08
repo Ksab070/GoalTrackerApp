@@ -1,0 +1,46 @@
+tasks:
+  - name: Install AWS CLI
+    before: echo "Installing AWS CLI"
+    init: curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "/home/gitpod/awscliv2.zip"
+    command: |
+      unzip "/home/gitpod/awscliv2.zip"
+      sudo "/home/gitpod/aws/install"
+  - name: Install Terraform
+    before: echo "Installing Terraform"
+    init: sudo apt-get update 
+    command: |
+      sudo apt-get install -y gnupg software-properties-common
+      wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor | sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg > /dev/null
+      gpg --no-default-keyring --keyring /usr/share/keyrings/hashicorp-archive-keyring.gpg --fingerprint
+      echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(grep -oP '(?<=UBUNTU_CODENAME=).*' /etc/os-release || lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+      sudo apt update
+      sudo apt-get install terraform
+  - name: Install Kubectl 
+    before: echo "Installing Kubectl"
+    init: curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+    command: sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+vscode:
+  extensions:
+  - 4ops.terraform
+  - cweijan.dbclient-jdbc
+  - cweijan.vscode-mysql-client2
+  - ms-azuretools.vscode-docker
+  - ecmel.vscode-html-css
+  - formulahendry.code-runner
+  - hashicorp.terraform
+  - mhutchie.git-graph
+  - ms-azuretools.vscode-containers
+  - ms-azuretools.vscode-docker
+  - ms-kubernetes-tools.vscode-kubernetes-tools
+  - ms-python.debugpy
+  - ms-python.python
+  - ms-vscode.cpptools-themes
+  - pkief.material-icon-theme
+  - redhat.ansible
+  - redhat.vscode-yaml
+  - ritwickdey.liveserver
+
+# runs during prebuild => https://www.gitpod.io/docs/configure/projects/prebuilds
+# List the start up tasks. Learn more: https://www.gitpod.io/docs/configure/workspaces/tasks
+# List the ports to expose. Learn more: https://www.gitpod.io/docs/configure/workspaces/ports
+# Learn more from ready-to-use templates: https://www.gitpod.io/docs/introduction/getting-started/quickstart
