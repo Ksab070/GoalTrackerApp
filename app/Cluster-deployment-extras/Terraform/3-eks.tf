@@ -2,7 +2,7 @@
 resource "aws_iam_role" "eks-cluster" {
   name = local.cluster_role_name
 
-  # This IAM policy is required so that the EKS can take IAM roles, this is a trust policy, not a permission policy
+  # This Trust policy is required so that the EKS can take IAM roles, this is a trust policy, not a permission policy
   assume_role_policy = <<POLICY
 {
     "Version": "2012-10-17",
@@ -33,7 +33,6 @@ resource "aws_iam_role_policy_attachment" "ebs-csi-driver-policy" {
   role = aws_iam_role.eks-cluster.name
 }
 
-
 resource "aws_eks_cluster" "eks" {
   name = "${local.eks_name}"
   role_arn = aws_iam_role.eks-cluster.arn
@@ -57,8 +56,4 @@ resource "aws_eks_cluster" "eks" {
 
   depends_on = [ aws_iam_role_policy_attachment.cluster-policy ]
 }
-
-resource "aws_eks_addon" "ebs-csi" {
-  cluster_name = aws_eks_cluster.eks.name
-  addon_name = "aws-ebs-csi-driver"
-}
+ 

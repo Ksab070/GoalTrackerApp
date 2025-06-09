@@ -42,14 +42,14 @@ docker push ttl.sh/subhan/demo:10h
 ```
 ## Install cloudnative PG
 ```
-kubectl apply --server-side -f \
-  https://raw.githubusercontent.com/cloudnative-pg/cloudnative-pg/release-1.23/releases/cnpg-1.23.1.yaml
+kubectl apply --server-side -f https://raw.githubusercontent.com/cloudnative-pg/cloudnative-pg/release-1.23/releases/cnpg-1.23.1.yaml
 ```
-## create Database cluster
-`kubectl apply -f postgres-cluster.yaml`
-## Create secret 
+
+## Create postgres DB cluster
 ```
-kubectl create secret generic my-postgresql-credentials --from-literal=password='new_password'  --from-literal=username='goals_user'  --dry-run=client -o yaml | kubectl apply -f -
+kubectl apply -f secret.yaml
+
+kubectl apply -f postgres-cluster.yaml
 ```
 
 ## Exec into pod to create table
