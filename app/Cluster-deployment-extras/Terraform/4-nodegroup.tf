@@ -48,14 +48,14 @@ resource "local_file" "aws-auth-configmap" {
   filename = "${path.module}/../../aws-auth-cm.yaml"
 }
 
-# LB controller code
-# resource "aws_iam_policy" "aws_lb_controller_policy" {
-#   name        = "AWSLoadBalancerControllerIAMPolicy"
-#   path        = "/"
-#   policy      = file("iam_policy.json")
-# }
+#ALB controller 
+resource "aws_iam_policy" "aws_lb_controller_policy" {
+  name        = "AWSLoadBalancerControllerIAMPolicy"
+  path        = "/"
+  policy      = file("iam_policy.json")
+}
 
-# resource "aws_iam_role_policy_attachment" "attach_lb_policy_to_node" {
-#   role       = split("/",aws_cloudformation_stack.nodegroup.outputs["NodeInstanceRole"])[1]
-#   policy_arn = aws_iam_policy.aws_lb_controller_policy.arn
-# }
+resource "aws_iam_role_policy_attachment" "attach_lb_policy_to_node" {
+  role       = split("/",aws_cloudformation_stack.nodegroup.outputs["NodeInstanceRole"])[1]
+  policy_arn = aws_iam_policy.aws_lb_controller_policy.arn
+}
