@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: my-app
-        image: saiyam911/kubesimplify-demo:{{ image_deploy_tag }}
+        image: ksub070/kubesimplify-demo:sha-fca78b0
         imagePullPolicy: Always
         env:
         - name: DB_USERNAME
@@ -70,17 +70,13 @@ spec:
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
-  name: production-app
+  name: letsencrypt-production
 spec:
   acme:
-    # The ACME server URL
+    email: khansubhan070@gmail.com
     server: https://acme-v02.api.letsencrypt.org/directory
-    # Email address used for ACME registration
-    email: demo@v1.com
-    # Name of a secret used to store the ACME account private key
     privateKeySecretRef:
-      name: app 
-    # Enable the HTTP-01 challenge provider
+      name: letsencrypt-production
     solvers:
     - http01:
         ingress:
@@ -93,23 +89,26 @@ metadata:
 spec:
   secretName: app
   issuerRef:
-    name: production-app
+    name: letsencrypt-production
     kind: ClusterIssuer
-  commonName: demo.kubesimplify.com
+  commonName: demo.cloud-personal.com
   dnsNames:
-  - demo.kubesimplify.com 
+  - demo.cloud-personal.com
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: my-app-ingress
   annotations:
-    cert-manager.io/cluster-issuer: production-app
-
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
 spec:
-  ingressClassName: nginx
+  ingressClassName: "nginx"
+  tls:
+  - hosts:
+    - demo.cloud-personal.com
+    secretName: app
   rules:
-  - host: demo.kubesimplify.com
+  - host: demo.cloud-personal.com
     http:
       paths:
       - path: /
@@ -119,10 +118,6 @@ spec:
             name: my-app-service
             port:
               number: 80
-  tls:
-  - hosts:
-    - demo.kubesimplify.com
-    secretName: app
 ---
 apiVersion: v1
 kind: Secret

@@ -2,16 +2,16 @@
 
 The repo is for the Capstone project of K8s Hindi Bootcamp by Saiyam. 
 
-# Ensure pre-requisites are installed, if not, refer below (Commands are given assuming you are on an Ubuntu machine):
+Ensure pre-requisites are installed, if not, refer below (Commands are given assuming you are on an Ubuntu machine):
 
-## AWS CLI 
+#### AWS CLI 
 ```
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
 unzip awscliv2.zip
 sudo ./aws/install
 ```
 
-## Terraform
+#### Terraform
 ```
 sudo apt-get update && sudo apt-get install -y gnupg software-properties-common
 
@@ -30,7 +30,7 @@ sudo apt update
 sudo apt-get install terraform
 ```
 
-## Docker
+#### Docker
 
 ```
 sudo apt-get update
@@ -48,7 +48,7 @@ sudo apt-get update
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 ```
 
-## Kubectl 
+#### Kubectl 
 ```
 curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
 
@@ -186,9 +186,9 @@ kubectl apply -f ingress.yaml
 ```
 
 15. You will get a DNS name from the details of nginx-ingress-controller's service, you can check it by `kubectl get svc -A` example:
-
-`ingress-nginx   ingress-nginx-controller             LoadBalancer   172.20.96.248    a2fa2b79403a04440887e46105ccff39-bbcd0c68b829138b.elb.us-east-1.amazonaws.com   80:32372/TCP,443:30695/TCP   134m`
-
+```
+ingress-nginx   ingress-nginx-controller             LoadBalancer   172.20.96.248    a2fa2b79403a04440887e46105ccff39-bbcd0c68b829138b.elb.us-east-1.amazonaws.com   80:32372/TCP,443:30695/TCP   134m
+```
 Map this DNS name to your domain by creating a CNAME record
 
 ===============================================
