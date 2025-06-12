@@ -45,7 +45,7 @@ resource "aws_cloudformation_stack" "nodegroup" {
 
 resource "local_file" "aws-auth-configmap" {
   content = data.template_file.node-instance-role-arn.rendered
-  filename = "${path.module}/../../aws-auth-cm.yaml"
+  filename = "${path.module}/../../Manifests/aws-auth-cm.yaml"
 }
 
 #ALB controller 

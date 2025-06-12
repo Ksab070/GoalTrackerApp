@@ -6,4 +6,3 @@ data:
   DB_USERNAME: "goals_user"
   DB_NAME: "goals_database"
   DB_PORT: "5432"
-

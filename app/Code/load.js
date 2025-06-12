@@ -1,3 +1,8 @@
+/* Used for Load testing using K6 
+1. Install K6 -> https://grafana.com/docs/k6/latest/set-up/install-k6/
+2. After installation run "k6 load.js" from the current directory 
+*/
+
 import http from "k6/http";
 import { check } from "k6";
 
@@ -7,7 +12,7 @@ export const options = {
   duration: '30s',
 };
 
-const BASE_URL = 'https://demo.kubesimplify.com'
+const BASE_URL = 'https://demo.cloud-personal.com'
 
 function demo() {
   const url = `${BASE_URL}`;

@@ -1,10 +1,10 @@
 tasks:
   - name: Install AWS CLI
     before: echo "Installing AWS CLI"
-    init: curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "/home/gitpod/awscliv2.zip"
+    init: curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o ~/awscliv2.zip
     command: |
-      unzip "/home/gitpod/awscliv2.zip"
-      sudo "/home/gitpod/aws/install"
+      unzip ~/awscliv2.zip -d ~/
+      sudo ~/aws/install 
   - name: Install Terraform
     before: echo "Installing Terraform"
     init: sudo apt-get update 

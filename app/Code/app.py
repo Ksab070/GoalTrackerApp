@@ -29,6 +29,7 @@ def index():
         goals = cursor.fetchall()
         cursor.close()
         connection.close()
+        # render_template looks for index.html in templates folder by default, this is a behavior by Flask
         return render_template('index.html', goals=goals)
     else:
         return "Error connecting to the PostgreSQL database", 500

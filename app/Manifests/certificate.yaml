@@ -5,9 +5,9 @@ metadata:
 spec:
   secretName: app
   issuerRef:
-    name: production-app
+    name: letsencrypt-production
     kind: ClusterIssuer
-  commonName: demo.kubesimplify.com
+  commonName: demo.cloud-personal.com
   dnsNames:
-  - demo.kubesimplify.com
+  - demo.cloud-personal.com
   
