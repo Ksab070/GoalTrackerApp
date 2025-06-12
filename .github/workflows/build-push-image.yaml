@@ -61,7 +61,7 @@ jobs:
 
       - name: Commit deploy manifest on local repo
         run: |
-          git add app/Deploy/deploy.yaml
+          git add app/Gitops/Deploy/deploy.yaml
           git commit -s -m "[skip ci] Generate deployment manifests"
           
       - name: Push deploy manifests to remote repo
