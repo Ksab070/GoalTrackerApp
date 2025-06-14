@@ -1,10 +1,14 @@
 tasks:
   - name: Install AWS CLI
     before: echo "Installing AWS CLI"
-    init: curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o ~/awscliv2.zip
-    command: |
-      unzip ~/awscliv2.zip -d ~/
-      sudo ~/aws/install 
+    env: 
+      AWS_CLI_AUTO_PROMPT: on_partial
+    init: |
+      cd /workspace
+      curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+      unzip awscliv2.zip
+      sudo ./aws/install
+      cd $THEIA_WORKSPACE_ROOT
   - name: Install Terraform
     before: echo "Installing Terraform"
     init: sudo apt-get update 
